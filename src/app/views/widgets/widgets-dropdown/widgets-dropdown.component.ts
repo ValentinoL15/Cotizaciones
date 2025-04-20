@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -12,22 +13,29 @@ import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { RouterLink } from '@angular/router';
 import { IconDirective } from '@coreui/icons-angular';
 import { RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, ThemeDirective, DropdownComponent, ButtonDirective, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, DropdownDividerDirective } from '@coreui/angular';
+import { CotizacionService } from '../../../services/cotizacion.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-widgets-dropdown',
     templateUrl: './widgets-dropdown.component.html',
     styleUrls: ['./widgets-dropdown.component.scss'],
     changeDetection: ChangeDetectionStrategy.Default,
-    imports: [RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, IconDirective, ThemeDirective, DropdownComponent, ButtonDirective, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, RouterLink, DropdownDividerDirective, ChartjsComponent]
+    imports: [RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, IconDirective, ThemeDirective, DropdownComponent, ButtonDirective, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, RouterLink, DropdownDividerDirective, ChartjsComponent, CommonModule]
 })
 export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef, private cotizacion:CotizacionService
   ) {}
 
   data: any[] = [];
   options: any[] = [];
+  dolar:any;
+  euro:any;
+  chf: any;
+  fs:any;
+  jpy:any;
   labels = [
     'January',
     'February',
@@ -124,6 +132,54 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.setData();
+    this.getCotizacion()
+    this.getCotizacionEur()
+    this.getCotizacionFs()
+    this.getCotizacionJpy()
+  }
+
+ getCotizacion(){
+    this.cotizacion.get_cotizacion_dolar().subscribe({
+      next: (res : any) => {
+        this.dolar = parseFloat(res.results[0].detalle[0].tipoCotizacion.toFixed(1));
+      }, 
+      error: (err : any) => {
+        console.log(err)
+      }
+    })
+  }
+
+  getCotizacionEur(){
+    this.cotizacion.get_cotizacion_eur().subscribe({
+      next: (res : any) => {
+        this.euro = parseFloat(res.results[0].detalle[0].tipoCotizacion).toFixed(1);
+      }, 
+      error: (err : any) => {
+        console.log(err)
+      }
+    })
+  }
+
+  getCotizacionFs(){
+    this.cotizacion.get_cotizacion_fs().subscribe({
+      next: (res : any) => {
+        this.fs = parseFloat(res.results[0].detalle[0].tipoCotizacion).toFixed(1);
+      }, 
+      error: (err : any) => {
+        console.log(err)
+      }
+    })
+  }
+
+  getCotizacionJpy(){
+    this.cotizacion.get_cotizacion_yen().subscribe({
+      next: (res : any) => {
+        this.jpy = parseFloat(res.results[0].detalle[0].tipoCotizacion).toFixed(1)
+      },
+      error : (err : any) => {
+        console.log(err)
+      }
+    })
   }
 
   ngAfterContentInit(): void {
@@ -260,4 +316,5 @@ export class ChartSample implements AfterViewInit {
       });
     }, 5000);
   }
+
 }
