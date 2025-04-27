@@ -1,36 +1,40 @@
 <div style="margin: 20px 0;">
     <c-card>
-        <c-card-body>
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                <h5 cCardTitle>Conversiones</h5>
-
-                <form cForm class="row g-3" (ngSubmit)="addInput()">
-                    <c-col class="d-flex align-items-center">
-                        <button type="button" cButton color="success" size="sm" (click)="addInput()"> + </button>
-                    </c-col>
-                </form>
-
-                <div class="mt-3 g-3" *ngFor="let input of inputs; let i = index">
-                    <input cFormControl placeholder="Valor" [(ngModel)]="input.value" name="value{{i}}"
-                    style="margin-bottom: 10px; max-width: 220px; border-radius: 8px; padding: 10px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-size: 16px; transition: all 0.3s ease;" class="me-2"
-                    [value]="input.value !== null && input.value !== undefined ? input.value : ''"
-                          (ngModelChange)="calculateTotal()" />
-                    <button type="button" cButton color="danger" size="sm" (click)="removeIndex(i)">-</button>
-                </div>
-
-            </div>
-        </c-card-body>
-
-        <div class="values">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <p style="font-weight: bold;">Valor en Dólares</p>
-                <p class="valord">{{ totalDolares | currency: 'ARS' }}</p>
-            </div>
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <p style="font-weight: bold;">Valor en Euros</p>
-                <p class="valore">{{ totalEuros | currency: 'ARS' }}</p>
-            </div>
+      <c-card-body>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <h5 cCardTitle>Conversiones</h5>
+  
+          <form cForm class="row g-3" (ngSubmit)="addInput()">
+            <c-col class="d-flex align-items-center">
+              <button type="button" cButton color="success" size="sm" (click)="addInput()"> + </button>
+            </c-col>
+          </form>
+  
+          <div class="input-container mt-3 g-3" *ngFor="let input of inputs; let i = index">
+            <input
+              cFormControl
+              placeholder="Valor"
+              [(ngModel)]="input.value"
+              name="value{{i}}"
+              style="margin-bottom: 10px; border-radius: 8px; padding: 10px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); font-size: 16px; transition: all 0.3s ease;"
+              class="me-2 input-field"
+              [value]="input.value !== null && input.value !== undefined ? input.value : ''"
+              (ngModelChange)="calculateTotal()"
+            />
+            <button type="button" cButton color="danger" size="sm" (click)="removeIndex(i)">-</button>
+          </div>
         </div>
+      </c-card-body>
+  
+      <div class="values">
+        <div class="value-item">
+          <p style="font-weight: bold;">Valor en Dólares</p>
+          <p class="valord">{{ totalDolares | currency: 'ARS' }}</p>
+        </div>
+        <div class="value-item">
+          <p style="font-weight: bold;">Valor en Euros</p>
+          <p class="valore">{{ totalEuros | currency: 'ARS' }}</p>
+        </div>
+      </div>
     </c-card>
-
-</div>
+  </div>

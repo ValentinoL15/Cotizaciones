@@ -1,21 +1,75 @@
 .values {
     width: 100%;
     display: flex;
-    justify-content: space-around;
-}
-
-.valore {
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite que los elementos se reorganicen en pantallas pequeñas */
     padding: 10px;
+    gap: 10px; /* Espacio entre los elementos */
+  }
+  
+  .value-item {
+    flex: 1; /* Cada item ocupa el mismo espacio */
+    min-width: 120px; /* Mínimo ancho para evitar que se encojan demasiado */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .valore,
+  .valord {
+    padding: 8px;
     border-radius: 5px;
+    font-weight: bold;
+    font-size: clamp(1.2rem, 4vw, 1.5rem); /* Tamaño de fuente adaptable */
+    overflow: hidden; /* Evita desbordamiento */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es largo */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    width: 100%; /* Ocupa el ancho disponible */
+    max-width: 200px; /* Limita el ancho máximo */
+  }
+  
+  .valore {
     background-color: aqua;
-    font-weight: bold;
-    font-size: 2rem;
-}
-
-.valord {
-    padding: 10px;
-    border-radius: 5px;
+  }
+  
+  .valord {
     background-color: rgb(89, 34, 240);
-    font-weight: bold;
-    font-size: 2rem;
-}
+    color: white; /* Mejora la legibilidad con fondo oscuro */
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre input y botón */
+  }
+  
+  .input-field {
+    width: 100%;
+    max-width: 90%; /* Ajusta el ancho para pantallas pequeñas */
+    box-sizing: border-box;
+  }
+  
+  /* Media query para pantallas pequeñas (móviles) */
+  @media (max-width: 576px) {
+    .values {
+      flex-direction: column; /* Apila los valores en una columna */
+      align-items: center;
+    }
+  
+    .value-item {
+      min-width: 100%; /* Ocupa todo el ancho disponible */
+      max-width: 300px; /* Limita el ancho máximo en móviles */
+    }
+  
+    .valore,
+    .valord {
+      font-size: clamp(1rem, 3.5vw, 1.3rem); /* Reduce el tamaño de fuente */
+      max-width: 100%; /* Asegura que no desborde */
+    }
+  
+    .input-field {
+      max-width: 80%; /* Reduce aún más el ancho del input en móviles */
+    }
+  }
