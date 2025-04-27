@@ -32,7 +32,6 @@ function isOverflown(element: HTMLElement) {
   imports: [
     SidebarComponent,
     SidebarHeaderComponent,
-    SidebarBrandComponent,
     SidebarNavComponent,
     SidebarFooterComponent,
     SidebarToggleDirective,

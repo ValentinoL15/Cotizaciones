@@ -27,7 +27,7 @@ export interface Dollar {
     templateUrl: './widgets-dropdown.component.html',
     styleUrls: ['./widgets-dropdown.component.scss'],
     changeDetection: ChangeDetectionStrategy.Default,
-    imports: [RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, IconDirective, ThemeDirective, DropdownComponent, ButtonDirective, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, RouterLink, DropdownDividerDirective, ChartjsComponent, CommonModule]
+    imports: [RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, CommonModule]
 })
 export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
