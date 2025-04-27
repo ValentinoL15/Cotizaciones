@@ -16,6 +16,12 @@ import { RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, 
 import { CotizacionService } from '../../../services/cotizacion.service';
 import { CommonModule } from '@angular/common';
 
+export interface Dollar {
+  venta: string;
+  compra: string;
+  nombre: string;
+}
+
 @Component({
     selector: 'app-widgets-dropdown',
     templateUrl: './widgets-dropdown.component.html',
@@ -31,8 +37,10 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   data: any[] = [];
   options: any[] = [];
-  dolar:any;
-  euro:any;
+  dolarVenta: any;
+  dolarCompra: any;
+  euroCompra:any;
+  euroVenta:any;
   chf: any;
   fs:any;
   jpy:any;
@@ -141,7 +149,8 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
  getCotizacion(){
     this.cotizacion.get_cotizacion_dolar().subscribe({
       next: (res : any) => {
-        this.dolar = parseFloat(res.results[0].detalle[0].tipoCotizacion.toFixed(1));
+        this.dolarVenta = res.venta;
+        this.dolarCompra = res.compra;
       }, 
       error: (err : any) => {
         console.log(err)
@@ -152,7 +161,8 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
   getCotizacionEur(){
     this.cotizacion.get_cotizacion_eur().subscribe({
       next: (res : any) => {
-        this.euro = parseFloat(res.results[0].detalle[0].tipoCotizacion).toFixed(1);
+        this.euroCompra = parseFloat(res.compra).toFixed(1);
+        this.euroVenta = parseFloat(res.venta).toFixed(1);
       }, 
       error: (err : any) => {
         console.log(err)

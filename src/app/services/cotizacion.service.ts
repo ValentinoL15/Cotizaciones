@@ -6,23 +6,23 @@ import { inject, Injectable } from '@angular/core';
 })
 export class CotizacionService {
 
-  API_URL = 'https://api.bcra.gob.ar'
+  API_URL = 'https://dolarapi.com'
 
   constructor(private http: HttpClient) { }
 
   get_cotizacion_dolar(){
-    return this.http.get(`${this.API_URL}/estadisticascambiarias/v1.0/Cotizaciones/USD`)
+    return this.http.get(`${this.API_URL}/v1/dolares/blue`)
   }
 
   get_cotizacion_eur(){
-    return this.http.get(`${this.API_URL}/estadisticascambiarias/v1.0/Cotizaciones/EUR`)
+    return this.http.get(`${this.API_URL}/v1/cotizaciones/eur`)
   }
 
   get_cotizacion_fs(){
-    return this.http.get(`${this.API_URL}/estadisticascambiarias/v1.0/Cotizaciones/CHF`)
+    return this.http.get(`${this.API_URL}/`)
   }
 
   get_cotizacion_yen(){
-    return this.http.get(`${this.API_URL}/estadisticascambiarias/v1.0/Cotizaciones/JPY`)
+    return this.http.get(`${this.API_URL}/`)
   }
 }

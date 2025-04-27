@@ -5,7 +5,8 @@
       [title]="'Dolar'"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        {{'$' + dolar}}
+        {{'Venta ' + '$' + dolarVenta}}<br>
+        {{'Compra ' + '$' + dolarCompra}}<br>
         <span class="fw-normal" style="font-size: 12px;">
           (-12.4% <svg cIcon name="cilArrowBottom" size="sm"></svg>)
         </span>
@@ -29,7 +30,8 @@
       color="info"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>${{euro}}</span>
+        <span>Venta ${{euroVenta}}</span><br>
+        <span>Compra ${{euroCompra}}</span><br>
         <span class="fw-normal" style="font-size: 12px;">
           (40.9%<svg cIcon name="cilArrowTop" size="sm"></svg>)
         </span>
